@@ -1,6 +1,7 @@
 # Backbone Firebase FireStore Backend
 
 [![Build Status](https://api.travis-ci.org/jeffreycahyono/backbone.firestore.svg?branch=master)](https://travis-ci.org/jeffreycahyono/backbone.firestore)
+[![Coverage Status](https://coveralls.io/repos/github/jeffreycahyono/backbone.firestore/badge.svg)](https://coveralls.io/github/jeffreycahyono/backbone.firestore)
 
 An adapter that replaces `Backbone.sync` to save to `Firebase Firestore` instead of using ajax.
 
