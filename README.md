@@ -2,6 +2,7 @@
 
 [![Build Status](https://api.travis-ci.org/jeffreycahyono/backbone.firestore.svg?branch=master)](https://travis-ci.org/jeffreycahyono/backbone.firestore)
 [![Coverage Status](https://coveralls.io/repos/github/jeffreycahyono/backbone.firestore/badge.svg)](https://coveralls.io/github/jeffreycahyono/backbone.firestore)
+[![npm version](https://badge.fury.io/js/backbone.firestore.svg)](https://badge.fury.io/js/backbone.firestore)
 
 An adapter that replaces `Backbone.sync` to save to `Firebase Firestore` instead of using ajax.
 
@@ -25,7 +26,7 @@ const SomeCollection = Collection.extend({
 
   /**
    * This collection will linked to Firestore collection which its name is
-   * 'SomeCollection' => firebase.firestore().collection(SomeCollection)
+   * 'SomeCollection' => firebase.firestore().collection('SomeCollection')
    */
   firestore: new FirestoreAdapter('SomeCollection'), 
 
@@ -45,13 +46,25 @@ const SomeModel = Model.extend({
 To enable realtime update for subsequent changes, use  `subscriptionEnabled: true` in the fetch options
 
 ```javascript
-const myModel = new SomeModel({id: 1234});
+const myModel = new SomeModel({ id: 1234 });
 //any changes in firestore doc of id 1234 will also synced to myModel
-myModel.fetch({subscriptionEnabled: true});  
+myModel.fetch({subscriptionEnabled: true});
 
 const myCol = new SomeCollection();
 //any changes in firestore collection will also synced to myCol
-myCol.fetch({subscriptionEnabled: true});  
+myCol.fetch({ subscriptionEnabled: true });
+```
+
+To unsubscribe from realtime update
+
+```javascript
+import { FirestoreAdapter, unsubscribeUpdate } from 'backbone.firestore';
+
+//myModel won't sync to firestore document changes
+unsubscribeUpdate(myModel);
+
+//myCol won't sync to firestore collection / queries changes
+unsubscribeUpdate(myCol);
 ```
 
 To perform firestore query
@@ -63,10 +76,10 @@ let options = {
   //return the query
   firestoreQuery = colRef => colRef.where('age', '<=', 50).orderBy('age')  
 }
-myCol.fetch(options);  
+myCol.fetch(options);
 ```
 
-To synchronise with the server, you can pass the `ajaxSync` flag to any options:
+To synchronise with the normal REST api server that uses backbone collection `url` property, you can pass the `ajaxSync` flag to any options:
 
 ```javascript
 const myModel = new SomeModel();
@@ -100,7 +113,7 @@ Install NodeJS and run `yarn` or `npm i` to get your dependencies, then:
 
 1. Open an issue identifying the fault
 2. Provide a fix, with tests demonstrating the issue
-3. Create `.env` in root project directory to provide the firebase firestore credential with fields. There is an example in `.env.example`
+3. Create `.env` in root project directory to provide the firebase firestore credentials. There is an example in `.env.example`
 4. Run `npm test`
 5. Create a pull request
 
