@@ -1,4 +1,3 @@
-import 'babel-polyfill';
 import Bb from 'backbone';
 import {
   omit

@@ -65,7 +65,8 @@ module.exports = function(config) {
             exclude: /node_modules/,
             loader: 'babel-loader',
             options: {
-              presets: ['es2015']
+              presets: ['es2015'],
+              plugins: ['transform-runtime']
             }
           },
           {

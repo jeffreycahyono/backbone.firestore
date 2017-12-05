@@ -1,4 +1,3 @@
-import 'babel-polyfill';
 import Backbone from 'backbone';
 import * as firebase from 'firebase';
 
