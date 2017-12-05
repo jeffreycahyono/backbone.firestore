@@ -1,5 +1,6 @@
 import Backbone from 'backbone';
 import * as firebase from 'firebase';
+import 'firebase/firestore';
 
 import { extend, omit } from 'underscore';
 

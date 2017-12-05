@@ -1,5 +1,4 @@
 import * as firebase from 'firebase';
-import 'firebase/firestore';
 
 firebase.initializeApp({
   apiKey: process.env.FIREBASE_API_KEY,
