@@ -24,6 +24,12 @@ module.exports = {
       commonjs: 'underscore',
       commonjs2: 'underscore',
       root: '_'
+    },
+    firebase: {
+      amd: 'firebase',
+      commonjs: 'firebase',
+      commonjs2: 'firebase',
+      root: 'firebase'
     }
   },
   module: {

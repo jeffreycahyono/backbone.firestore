@@ -1,6 +1,5 @@
 import Backbone from 'backbone';
 import * as firebase from 'firebase';
-import 'firebase/firestore';
 
 import { extend, omit } from 'underscore';
 
@@ -24,7 +23,7 @@ let getModelDocRef = (model) => {
   if (!model.id) {
     throw 'model.id is needed to get model\'s docRef ';
   }
-  return adapter._collectionRef.doc(model.id);
+  return adapter.getCollectionRef().doc(model.id);
 };
 
 function getFirestoreProp(modelOrCollection, property) {
@@ -194,11 +193,15 @@ class FirestoreAdapter {
     if (!collectionName) {
       throw 'Backbone.firestore: collectionName must be defined in constructor.';
     }
-    this._collectionRef = firebase.firestore().collection(collectionName);
+    this._collectionRef = null;
+    this._collectionName = collectionName;
     extend(this, Backbone.Events);
   }
 
   getCollectionRef() {
+    if (!this._collectionRef) {
+      this._collectionRef = firebase.firestore().collection(this._collectionName);
+    }
     return this._collectionRef;
   }
 

@@ -16,6 +16,7 @@ import {
 } from 'sinon';
 
 import * as firebase from 'firebase';
+import 'firebase/firestore';
 import './initFirebase';
 
 
